@@ -45,6 +45,10 @@ Use Conventional Commits:
 
 After pushing, do not `git commit --amend` or `git push --force`. Fix issues with new commits so the review history is preserved.
 
+## Language
+
+Project documentation and GitHub templates are maintained in English. Commit messages use English as well.
+
 ## Scripts
 
 | Script | Description |
