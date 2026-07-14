@@ -1,0 +1,17 @@
+node_modules
+.pnpm-store
+pnpm-lock.yaml
+.turbo
+*.local
+.env
+.env.local
+dist
+coverage
+.DS_Store
+*.log
+.vite
+
+# TypeScript build outputs
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts

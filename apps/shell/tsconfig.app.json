@@ -1,0 +1,9 @@
+{
+  "extends": "@rsm/config/tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "@rsm/shell/*": ["./src/*"] },
+    "composite": true
+  },
+  "include": ["src"]
+}

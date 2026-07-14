@@ -1,0 +1,9 @@
+{
+  "extends": "@rsm/config/tsconfig.base.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": false,
+    "composite": true,
+    "noEmit": false
+  },
+  "include": ["vite.config.ts"]
+}
