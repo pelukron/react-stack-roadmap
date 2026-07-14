@@ -60,3 +60,30 @@ Project documentation and GitHub templates are maintained in English. Commit mes
 | `pnpm check` | Lint + typecheck + test |
 | `pnpm lint` | Run Biome on all packages |
 
+## Manual contribution workflow (no GitHub token / CLI)
+
+If you do not have `gh` CLI configured or prefer to contribute without tokens, follow this workflow directly on GitHub:
+
+1. **Fork** the repository using the GitHub web UI.
+2. In your fork, **create a branch** from `main` using the GitHub Flow naming convention (for example `feature/add-auth`).
+3. **Edit files** through the GitHub web editor or on your local clone.
+4. **Run checks locally** if possible:
+   ```bash
+   pnpm install
+   pnpm check
+   pnpm build
+   ```
+5. **Commit** your changes with a Conventional Commit message.
+6. **Open a Pull Request** from your fork to `pelukron/react-stack-roadmap:main`.
+7. In the PR description, write `Closes #N` to link the related issue.
+8. Wait for CI to pass and for review.
+
+### If you only need to fix a typo or small issue
+
+1. Open the file on GitHub.
+2. Click the pencil icon (Edit this file).
+3. Make the edit.
+4. Choose **Create a new branch for this commit and start a pull request**.
+5. Submit the PR.
+
+This works without installing any tools on your machine.
