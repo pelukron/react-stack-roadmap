@@ -4,7 +4,7 @@ Thanks for contributing!
 
 ## Development workflow
 
-1. Create an issue describing the change.
+1. Create an issue describing the change. Use the issue body as the single source of truth for requirements, acceptance criteria and related links (Jira-style).
 2. Create a branch from `main` using the GitHub Flow naming convention:
    ```bash
    git checkout -b feature/<short-name>
@@ -37,7 +37,7 @@ Thanks for contributing!
    git commit -m "feat: add authentication (closes #N)"
    ```
 
-5. Push and open a PR referencing the issue (`Closes #N` in the PR description and, ideally, in the commit body).
+5. Push and open a PR referencing the issue (`Closes #N` in the PR description and, ideally, in the commit body). Update the issue with any relevant implementation notes or blockers.
 
    Use the helper scripts for GitHub CLI:
    ```bash
@@ -49,7 +49,8 @@ Thanks for contributing!
    ```
 
 6. Add a changeset if the PR is user-facing (`pnpm changeset`). Changesets describe what should be released and what version bump to apply.
-7. Wait for CI to pass and merge.
+7. Wait for CI to pass and for review/approval from the code owner.
+8. Merge. Do **not** keep long-lived implementation plans in the repo; the issue and PR history already capture the full context.
 
 ## Commit convention
 
