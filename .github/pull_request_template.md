@@ -1,6 +1,6 @@
-## Descripción
+## Description
 
-## Tipo de cambio
+## Type of change
 - [ ] fix
 - [ ] feat
 - [ ] docs
@@ -9,9 +9,9 @@
 - [ ] ci
 
 ## Checklist
-- [ ] Tests pasan localmente (`pnpm test`)
-- [ ] Lint pasa (`pnpm lint`)
-- [ ] Typecheck pasa (`pnpm typecheck`)
-- [ ] Build pasa (`pnpm build`)
-- [ ] Commits siguen Conventional Commits
-- [ ] Referencia issue con `Closes #N` si aplica
+- [ ] Tests pass locally (`pnpm test`)
+- [ ] Lint passes (`pnpm lint`)
+- [ ] Typecheck passes (`pnpm typecheck`)
+- [ ] Build passes (`pnpm build`)
+- [ ] Commits follow Conventional Commits
+- [ ] References issue with `Closes #N` if applicable
