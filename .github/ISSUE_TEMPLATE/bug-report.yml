@@ -1,38 +1,38 @@
 name: Bug Report
-description: Report a bug in the project
+description: Reporta un bug en el proyecto
 title: '[Bug] '
 labels: ['bug']
 body:
   - type: textarea
     id: description
     attributes:
-      label: Describe the bug
-      description: A clear and concise description of what the bug is.
+      label: Describe el bug
+      description: Descripción clara y concisa del problema.
     validations:
       required: true
   - type: textarea
     id: reproduce
     attributes:
-      label: Steps to reproduce
-      description: Steps to reproduce the behavior.
+      label: Pasos para reproducir
+      description: Pasos para reproducir el comportamiento.
       placeholder: |
-        1. Go to '...'
-        2. Click on '...'
-        3. See error
+        1. Ir a '...'
+        2. Ejecutar '...'
+        3. Ver error
     validations:
       required: true
   - type: textarea
     id: expected
     attributes:
-      label: Expected behavior
-      description: What you expected to happen.
+      label: Comportamiento esperado
+      description: Qué esperabas que sucediera.
     validations:
       required: true
   - type: textarea
     id: environment
     attributes:
-      label: Environment
-      description: OS, browser, Node version, pnpm version, etc.
+      label: Entorno
+      description: OS, navegador, Node, pnpm, etc.
       placeholder: |
         - OS: Ubuntu 22.04
         - Node: 22.x
