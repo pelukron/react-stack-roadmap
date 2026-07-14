@@ -5,10 +5,23 @@ Thanks for contributing!
 ## Development workflow
 
 1. Create an issue describing the change.
-2. Create a branch from `main`:
+2. Create a branch from `main` using the GitHub Flow naming convention:
    ```bash
-   git checkout -b feat/<short-name>
+   git checkout -b feature/<short-name>
    ```
+
+   Branch prefixes:
+
+   | Prefix | Use for |
+   |---|---|
+   | `feature/` | New functionality |
+   | `bugfix/` | Bug fixes |
+   | `chore/` | Tooling, config, dependencies |
+   | `docs/` | Documentation only |
+   | `ci/` | CI/CD changes |
+   | `refactor/` | Code change with no behavior change |
+
+   Example: `feature/add-authentication`, `ci/add-codeql`.
 3. Make changes and run:
    ```bash
    pnpm install
@@ -32,6 +45,10 @@ Use Conventional Commits:
 ## No force-push / amend
 
 After pushing, do not `git commit --amend` or `git push --force`. Fix issues with new commits so the review history is preserved.
+
+## Language
+
+Project documentation and GitHub templates are maintained in English. Commit messages use English as well.
 
 ## Scripts
 
