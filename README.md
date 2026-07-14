@@ -1,49 +1,49 @@
 # React Stack Roadmap
 
-Monorepo para aprender el stack actual de React con app-shell y micro-frontends.
+Monorepo to learn the current React stack with app-shell and micro-frontends.
 
-## Arquitectura
+## Architecture
 
 ```
 react-stack-roadmap/
-├── .github/              # GitHub Actions, templates de issues y CODEOWNERS
+├── .github/              # GitHub Actions, issue templates and CODEOWNERS
 ├── apps/
-│   ├── shell            # app-shell (host) con Module Federation
-│   └── remote-home      # micro-frontend remoto (expuesto al shell)
+│   ├── shell            # app-shell (host) with Module Federation
+│   └── remote-home      # remote micro-frontend (exposed to the shell)
 ├── packages/
-│   └── config           # config compartida: Biome, tsconfig base
-├── .hermes/plans/       # planes de implementación
-├── biome.json           # extiende la config de @rsm/config
-├── package.json         # scripts raíz y workspaces
-├── pnpm-workspace.yaml  # define los workspaces
-├── turbo.json           # pipeline de tareas (dev/build/test/lint/typecheck)
+│   └── config           # shared config: Biome, base tsconfig
+├── .hermes/plans/       # implementation plans
+├── biome.json           # extends @rsm/config
+├── package.json         # root scripts and workspaces
+├── pnpm-workspace.yaml  # defines workspaces
+├── turbo.json           # task pipeline (dev/build/test/lint/typecheck)
 └── README.md
 ```
 
-## ¿Qué hace cada pieza?
+## What does each piece do?
 
-| Archivo / carpeta | Responsabilidad |
-|-------------------|-----------------|
-| `apps/shell` | App-shell host. Carga `remote-home` en runtime mediante Module Federation. Vite + React 19 + TS + Vitest. |
-| `apps/remote-home` | Micro-frontend remoto. Expone su `App.tsx` como `./App` vía Module Federation. Se puede desplegar independientemente. |
-| `packages/config` | Config compartida: `biome.json` (linter/formatter), `tsconfig.base.json` (reglas estrictas de TS). |
-| `package.json` | Scripts raíz (`dev`, `build`, `test`, `check`) y devDependencies comunes (Turbo, Husky, lint-staged, Biome). |
-| `pnpm-workspace.yaml` | Declara los workspaces (`apps/*`, `packages/*`). |
-| `turbo.json` | Orquesta tareas entre workspaces, maneja caché y dependencias (`build` depende de `^build`). |
-| `biome.json` | Punto de entrada local que extiende `@rsm/config/biome.json`. |
-| `.github/workflows/ci.yml` | CI: instala pnpm/Node, corre `pnpm check` y `pnpm build` en PRs y pushes a `main`. |
-| `.github/ISSUE_TEMPLATE/` | Formularios para bug reports y feature requests. |
-| `.github/CODEOWNERS` | Dueño del repo: `@pelukron`. |
-| `CONTRIBUTING.md` | Flujo de trabajo, convención de commits, política de no force-push/amend. |
+| File / folder | Responsibility |
+|---------------|----------------|
+| `apps/shell` | App-shell host. Loads `remote-home` at runtime via Module Federation. Vite + React 19 + TS + Vitest. |
+| `apps/remote-home` | Remote micro-frontend. Exposes its `App.tsx` as `./App` via Module Federation. Can be deployed independently. |
+| `packages/config` | Shared config: `biome.json` (linter/formatter), `tsconfig.base.json` (strict TS rules). |
+| `package.json` | Root scripts (`dev`, `build`, `test`, `check`) and common devDependencies (Turbo, Husky, lint-staged, Biome). |
+| `pnpm-workspace.yaml` | Declares workspaces (`apps/*`, `packages/*`). |
+| `turbo.json` | Orchestrates tasks across workspaces, handles cache and dependencies (`build` depends on `^build`). |
+| `biome.json` | Local entry point that extends `@rsm/config/biome.json`. |
+| `.github/workflows/ci.yml` | CI: installs pnpm/Node, runs `pnpm check` and `pnpm build` on PRs and pushes to `main`. |
+| `.github/ISSUE_TEMPLATE/` | Bug report and feature request forms. |
+| `.github/CODEOWNERS` | Repo owner: `@pelukron`. |
+| `CONTRIBUTING.md` | Workflow, commit convention, no force-push/amend policy. |
 
 ## Scripts
 
 ```bash
-pnpm dev          # dev concurrente de todos los apps
-pnpm build        # build de todos los apps
-pnpm test         # test de todos los apps
-pnpm lint         # lint con Biome
-pnpm typecheck    # typecheck con tsc
+pnpm dev          # concurrent dev servers for all apps
+pnpm build        # build all apps
+pnpm test         # run all tests
+pnpm lint         # lint with Biome
+pnpm typecheck    # typecheck with tsc
 pnpm check        # lint + typecheck + test
 ```
 
@@ -55,6 +55,6 @@ pnpm check        # lint + typecheck + test
 - Vitest + React Testing Library
 - Module Federation (`@module-federation/vite`)
 
-## Próximos pasos
+## Next steps
 
-Ver `ARCHITECTURE.md` para detalles de flujo de datos, decisiones de diseño y notas de desarrollo.
+See `ARCHITECTURE.md` for data flow details, design decisions and development notes.

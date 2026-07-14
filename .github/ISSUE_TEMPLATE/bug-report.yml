@@ -17,7 +17,7 @@ body:
       description: Steps to reproduce the behavior.
       placeholder: |
         1. Go to '...'
-        2. Click on '...'
+        2. Run '...'
         3. See error
     validations:
       required: true
