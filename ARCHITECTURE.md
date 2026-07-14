@@ -66,7 +66,8 @@ Each app extends `tsconfig.base.json` and adds its own paths and included files.
 - No `git commit --amend` or `git push --force` after push.
 - Every significant change: issue → branch → PR → green CI → merge.
 - Auto-delete branches enabled on GitHub.
-- Branch naming follows GitHub Flow: `feature/`, `bugfix/`, `chore/`, `docs/`, `ci/`, `refactor/` + kebab-case description.
+- Branch naming follows GitHub Flow: `feature/`, `bugfix/`, `chore/`, `docs/`, `ci/`, `refactor/`, `test/` + kebab-case description.
+- `main` is protected: pull requests require **one approving review from the code owner** (`@pelukron`).
 
 ## Known issues
 

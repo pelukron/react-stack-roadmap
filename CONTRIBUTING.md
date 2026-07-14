@@ -92,6 +92,15 @@ Until this is enabled, the version bump will be pushed to `changeset-release/mai
 
 After pushing, do not `git commit --amend` or `git push --force`. Fix issues with new commits so the review history is preserved.
 
+## Branch protection
+
+`main` is protected by a GitHub ruleset:
+- Pull requests require at least one approving review.
+- The approving review must come from the code owner (`@pelukron`).
+- Force-push and direct deletion of `main` are blocked.
+
+This means automated tooling can open pull requests, but only the repository owner can approve and merge them.
+
 ## Language
 
 Project documentation and GitHub templates are maintained in English. Commit messages use English as well.

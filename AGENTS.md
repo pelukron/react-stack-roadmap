@@ -76,3 +76,7 @@ Project documentation, GitHub templates, and commit messages are maintained in *
 ## No destructive operations without approval
 
 If a task requires deleting files, resetting branches, or modifying `main` directly, ask for explicit user approval first.
+
+## Branch protection
+
+`main` requires an approving review from the code owner (`@pelukron`). Automated agents can open pull requests, but cannot merge them.
