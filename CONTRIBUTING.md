@@ -28,7 +28,16 @@ Thanks for contributing!
    pnpm check
    pnpm build
    ```
-4. Push and open a PR referencing the issue (`Closes #N` in the PR description and, ideally, in the commit body).
+3. Push and open a PR referencing the issue (`Closes #N` in the PR description and, ideally, in the commit body).
+
+   Use the helper scripts for GitHub CLI:
+   ```bash
+   # Create issue + branch
+   bin/gh-issue fix "correct changeset package target"
+
+   # After committing and pushing, create the PR
+   bin/gh-pr 18 fix/correct-changeset-package-target
+   ```
 5. Add a changeset if the PR is user-facing (`pnpm changeset`). Changesets describe what should be released and what version bump to apply.
 6. Wait for CI to pass and merge.
 
@@ -59,6 +68,8 @@ Project documentation and GitHub templates are maintained in English. Commit mes
 | `pnpm test` | Run all tests |
 | `pnpm check` | Lint + typecheck + test |
 | `pnpm lint` | Run Biome on all packages |
+| `bin/gh-issue` | Create issue + linked branch (GitHub CLI) |
+| `bin/gh-pr` | Create PR from branch linked to issue (GitHub CLI) |
 
 ## Manual contribution workflow (no GitHub token / CLI)
 

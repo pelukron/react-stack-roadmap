@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Create PR from current branch, linking to the issue.
+
+set -euo pipefail
+
+if [ $# -lt 2 ]; then
+  echo "Usage: $(basename "$0") <issue-number> <branch>"
+  exit 1
+fi
+
+ISSUE_NUM="$1"
+BRANCH="$2"
+
+if ! git rev-parse --verify "$BRANCH" &> /dev/null; then
+  echo "Error: branch '$BRANCH' not found." && exit 1
+fi
+
+git checkout "$BRANCH"
+
+# Ensure branch is pushed
+if ! git rev-parse --abbrev-ref --symbolic-full-name "@{u}" &> /dev/null 2>&1; then
+  git push -u origin "$BRANCH"
+fi
+
+TITLE=$(gh issue view "$ISSUE_NUM" --json title --jq '.title')
+
+BODY="Closes #${ISSUE_NUM}
+
+This PR addresses #${ISSUE_NUM}.
+
+## Checklist
+- [ ] I ran \`pnpm check\`
+- [ ] I ran \`pnpm build\`
+- [ ] I added a changeset if this change is user-facing (\`pnpm changeset\`)"
+
+echo "Creating PR for branch '$BRANCH' linked to issue #$ISSUE_NUM..."
+gh pr create --title "$TITLE" --body "$BODY" --base main --head "$BRANCH"
+
+echo "Done."

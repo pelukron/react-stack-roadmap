@@ -1,8 +1,8 @@
 ---
-"react-stack-roadmap": minor
+"@rsm/config": minor
 ---
 
-Add Changesets for automated versioning and releases.
+Add shared config workspace and Changesets setup.
 
 - Install `@changesets/cli` and `@changesets/changelog-github`
 - Configure `.changeset/config.json` with GitHub changelog integration

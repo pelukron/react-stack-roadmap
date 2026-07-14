@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+# GitHub Issue + PR CLI helper for react-stack-roadmap
+# Creates an issue, links a branch/PR to it, following repo conventions.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+cd "$REPO_ROOT"
+
+# Required: gh CLI authenticated
+if ! command -v gh &>/dev/null; then
+  echo "Error: gh CLI not found. Install: https://cli.github.com/" && exit 1
+fi
+
+if ! gh auth status &>/dev/null; then
+  echo "Error: gh not authenticated. Run: gh auth login" && exit 1
+fi
+
+USAGE="Usage: $(basename "$0") <type> <title> [body]
+
+type: feature | bugfix | chore | docs | ci | refactor | test
+title: short issue/pr title
+body: optional issue description (defaults to title)"
+
+if [ $# -lt 2 ]; then
+  echo "$USAGE"
+  exit 1
+fi
+
+TYPE="$1"
+TITLE="$2"
+BODY="${3:-$TITLE}"
+
+# Validate type
+VALID_TYPES="feature bugfix chore docs ci refactor test"
+if ! echo "$VALID_TYPES" | grep -qw "$TYPE"; then
+  echo "Error: invalid type '$TYPE'. Must be one of: $VALID_TYPES" && exit 1
+fi
+
+# Derive branch name
+SLUG=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '-' | sed 's/^-//;s/-$//')
+BRANCH="${TYPE}/${SLUG}"
+
+# Confirm
+read -r -p "Create issue + branch + PR: '${TITLE}' on branch '${BRANCH}'? [y/N] " REPLY
+if [[ ! "$REPLY" =~ ^[Yy]$ ]]; then
+  echo "Aborted."
+  exit 0
+fi
+
+# Create issue
+ISSUE_URL=$(gh issue create --title "$TITLE" --body "$BODY")
+ISSUE_NUM=$(echo "$ISSUE_URL" | grep -oE '[0-9]+$')
+
+echo "Created issue #$ISSUE_NUM: $ISSUE_URL"
+
+# Ensure main is up to date
+git checkout main
+git pull origin main
+
+# Create branch
+git checkout -b "$BRANCH"
+
+echo "Branch '$BRANCH' created."
+echo "Make your changes, then run:"
+echo "  git add -A"
+echo "  git commit -m '${TYPE}: ${TITLE} (closes #${ISSUE_NUM})'"
+echo "  git push origin ${BRANCH}"
+echo "  $(basename "$0")-pr ${ISSUE_NUM} ${BRANCH}"
