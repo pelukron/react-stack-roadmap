@@ -20,26 +20,36 @@ Thanks for contributing!
    | `docs/` | Documentation only |
    | `ci/` | CI/CD changes |
    | `refactor/` | Code change with no behavior change |
+   | `test/` | Adding or updating tests |
 
    Example: `feature/add-authentication`, `ci/add-codeql`.
+
 3. Make changes and run:
    ```bash
    pnpm install
    pnpm check
    pnpm build
    ```
-3. Push and open a PR referencing the issue (`Closes #N` in the PR description and, ideally, in the commit body).
+
+4. Commit using [Conventional Commits](#commit-convention):
+   ```bash
+   git add -A
+   git commit -m "feat: add authentication (closes #N)"
+   ```
+
+5. Push and open a PR referencing the issue (`Closes #N` in the PR description and, ideally, in the commit body).
 
    Use the helper scripts for GitHub CLI:
    ```bash
    # Create issue + branch
-   bin/gh-issue fix "correct changeset package target"
+   bin/gh-issue bugfix "correct changeset package target"
 
    # After committing and pushing, create the PR
-   bin/gh-pr 18 fix/correct-changeset-package-target
+   bin/gh-pr 18 bugfix/correct-changeset-package-target
    ```
-5. Add a changeset if the PR is user-facing (`pnpm changeset`). Changesets describe what should be released and what version bump to apply.
-6. Wait for CI to pass and merge.
+
+6. Add a changeset if the PR is user-facing (`pnpm changeset`). Changesets describe what should be released and what version bump to apply.
+7. Wait for CI to pass and merge.
 
 ## Commit convention
 
@@ -50,6 +60,7 @@ Use Conventional Commits:
 - `docs:` documentation only
 - `refactor:` code change that neither fixes a bug nor adds a feature
 - `test:` adding or updating tests
+- `ci:` CI/CD changes
 
 ## Release workflow
 
