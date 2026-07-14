@@ -1,1 +1,8 @@
+# Default owner for everything in the repo
 * @pelukron
+
+# GitHub workflows and CI configuration
+/.github/ @pelukron
+
+# Documentation
+*.md @pelukron
