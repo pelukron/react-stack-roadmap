@@ -53,11 +53,17 @@ Use GitHub Flow naming convention:
 - `docs/<short-name>`
 - `ci/<short-name>`
 - `refactor/<short-name>`
+- `test/<short-name>`
 
 No issue number in the branch name. Link the issue in the PR description with `Closes #N`.
 
+## Helper scripts
+
+The repo provides `bin/gh-issue` and `bin/gh-pr` to create issues and linked PRs using the GitHub CLI. See `CONTRIBUTING.md` for usage.
+
 ## Pull requests
 
+- Create an issue first, then a branch, then a PR.
 - One logical change per PR.
 - Update `CHANGELOG.md` if the change is user-facing.
 - Add a changeset (`pnpm changeset`) if the PR changes packages that should be released.
