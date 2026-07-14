@@ -1,4 +1,8 @@
 {
-  "files": [],
-  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
+  "extends": "@rsm/config/tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "@rsm/shell/*": ["./src/*"] }
+  },
+  "include": ["src", "vite.config.ts"]
 }
