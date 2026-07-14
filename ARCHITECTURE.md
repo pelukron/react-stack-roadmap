@@ -1,73 +1,74 @@
-# Arquitectura
+# Architecture
 
-Este documento explica las decisiones y el propósito de cada parte del monorepo.
+This document explains the decisions and purpose of each part of the monorepo.
 
-## ¿Por qué monorepo?
+## Why a monorepo?
 
-El monorepo (`pnpm` + `Turbo`) reduce fricción para sesiones de estudio diarias: los cambios cross-app se hacen en un solo PR, la CI unifica calidad y las versiones de React/TypeScript se comparten. Cuando los equipos o despliegues sean independientes, se puede migrar a sub-repos por MFE.
+The monorepo (`pnpm` + `Turbo`) reduces friction for daily learning sessions: cross-app changes happen in a single PR, CI unifies quality, and React/TypeScript versions are shared. When teams or deployments become independent, it can be migrated to separate repos per MFE.
 
-## App-shell y micro-frontend
+## App-shell and micro-frontend
 
 ```
 ┌─────────────┐      Module Federation      ┌──────────────┐
 │   shell     │  ◄──────────────────────────  │  remote-home │
-│  (host)     │      carga ./App en runtime  │   (remote)   │
-└─────────────┘                              └──────────────┘
+│  (host)     │      loads ./App at runtime   │   (remote)   │
+└─────────────┘                               └──────────────┘
 ```
 
-- **`apps/shell`**: el host. Declara en `vite.config.ts` que `home` es un remote. En runtime, el navegador pide `mf-manifest.json` a `localhost:3001` para saber qué expone.
-- **`apps/remote-home`**: el remote. En `vite.config.ts` expone `./App` como `./App` (o `HomeRemote`). Sirve su propio `remoteEntry.js`.
-- **`@module-federation/vite`**: plugin de Vite que resuelve tanto host como remote sin depender de Webpack/Rspack.
-- **Shared deps**: `react` y `react-dom` se marcan como compartidos para que no se carguen dos veces.
+- **`apps/shell`**: the host. Declares in `vite.config.ts` that `home` is a remote. At runtime, the browser requests `mf-manifest.json` from `localhost:3001` to know what is exposed.
+- **`apps/remote-home`**: the remote. In `vite.config.ts` exposes `./App` as `./App` (or `HomeRemote`). Serves its own `remoteEntry.js`.
+- **`@module-federation/vite`**: Vite plugin that resolves both host and remote without depending on Webpack/Rspack.
+- **Shared deps**: `react` and `react-dom` are marked as shared so they are not loaded twice.
 
-## Config compartida (`packages/config`)
+## Shared config (`packages/config`)
 
-| Archivo | Uso |
-|---------|-----|
-| `biome.json` | Reglas de linter y formatter para todo el monorepo. |
-| `tsconfig.base.json` | Config base estricta de TypeScript. |
+| File | Use |
+|------|-----|
+| `biome.json` | Linter and formatter rules for the whole monorepo. |
+| `tsconfig.base.json` | Strict base TypeScript config. |
 
-Cada app extiende `tsconfig.base.json` y añade sus propias rutas (`paths`) y archivos incluidos. Se evita `tsconfig.app.json`/`tsconfig.node.json` para no generar archivos intermedios que Biome intente formatear.
+Each app extends `tsconfig.base.json` and adds its own paths and included files. `tsconfig.app.json`/`tsconfig.node.json` are avoided to prevent generated artifacts from confusing Biome.
 
-## Tooling de calidad
+## Quality tooling
 
-| Herramienta | Rol |
-|-------------|-----|
-| Biome | Linter y formatter. Reemplaza ESLint + Prettier con una sola dependencia. |
-| Husky | Corre `prepare` al instalar y ancla hooks de Git. |
-| lint-staged | Corre `biome check --write` sobre archivos staged antes de commit. |
-| Vitest | Tests unitarios. Corre con React Testing Library y jsdom. |
-| TypeScript | Chequeo estático estricto (`strict: true`). |
+| Tool | Role |
+|------|------|
+| Biome | Linter and formatter. Replaces ESLint + Prettier with a single dependency. |
+| Husky | Runs `prepare` on install and anchors Git hooks. |
+| lint-staged | Runs `biome check --write` on staged files before commit. |
+| Vitest | Unit tests. Runs with React Testing Library and jsdom. |
+| TypeScript | Strict static checking (`strict: true`). |
 
 ## CI
 
-`.github/workflows/ci.yml` se ejecuta en cada PR y push a `main`:
+`.github/workflows/ci.yml` runs on every PR and push to `main`:
 
-1. Checkout completo (`fetch-depth: 0`) para que `turbo` y `git` tengan contexto.
-2. Setup de pnpm 9.15.0.
-3. Setup de Node 22 con caché de pnpm.
+1. Full checkout (`fetch-depth: 0`) so `turbo` and `git` have context.
+2. Setup pnpm 9.15.0.
+3. Setup Node 22 with pnpm cache.
 4. `pnpm install --frozen-lockfile`.
 5. Job `check`: `pnpm check` (lint, typecheck, test).
-6. Job `build`: `pnpm build` (todos los apps).
+6. Job `build`: `pnpm build` (all apps).
 
-## Decisiones de diseño
+## Design decisions
 
-| Decisión | Razón |
-|----------|-------|
-| Vite en vez de Next.js | Empezar con Vite + SPA permite entender MF claramente. Next.js se añade después en una app separada para comparar SSR/RSC. |
-| Biome en vez de ESLint/Prettier | Menor configuración, más rápido, ideal para un repo de aprendizaje. |
-| TypeScript estricto | Detecta errores temprano y obliga a aprender buenas prácticas. |
-| Un solo `tsconfig.json` por app | Evita archivos generados (`*.js`, `*.d.ts`, `*.tsbuildinfo`) que ensucian el repo y confunden a Biome. |
-| Husky + lint-staged | Garantiza que el código staged pase Biome antes de commit. |
+| Decision | Reason |
+|----------|--------|
+| Vite instead of Next.js | Starting with Vite + SPA makes Module Federation clearer. Next.js will be added later in a separate app to compare SSR/RSC. |
+| Biome instead of ESLint/Prettier | Less configuration, faster, ideal for a learning repo. |
+| Strict TypeScript | Catches errors early and forces good practices. |
+| One `tsconfig.json` per app | Avoids generated files (`*.js`, `*.d.ts`, `*.tsbuildinfo`) that clutter the repo and confuse Biome. |
+| Husky + lint-staged | Ensures staged code passes Biome before commit. |
 
-## Convenciones del repo
+## Repo conventions
 
-- Commits con Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`, etc.).
-- No `git commit --amend` ni `git push --force` después de push.
-- Cada cambio significativo: issue → rama → PR → CI verde → merge.
-- Auto-delete branches activo en GitHub.
+- Commits with Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`, etc.).
+- No `git commit --amend` or `git push --force` after push.
+- Every significant change: issue → branch → PR → green CI → merge.
+- Auto-delete branches enabled on GitHub.
+- Branch naming follows GitHub Flow: `feature/`, `bugfix/`, `chore/`, `docs/`, `ci/`, `refactor/` + kebab-case description.
 
-## Problemas conocidos
+## Known issues
 
-- El ruleset de protección de `main` se creó vía API sin status checks requeridos; falta agregar `check` como required status check manualmente en GitHub Settings cuando CI haya corrido al menos una vez en un PR.
-- El remote actualmente se expone pero el shell aún no lo renderiza; eso será el siguiente paso del roadmap.
+- The branch protection ruleset for `main` was created via API without required status checks; `check` must be added manually in GitHub Settings once CI has run on at least one PR.
+- The remote is currently exposed but the shell does not render it yet; that will be the next roadmap step.
