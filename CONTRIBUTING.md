@@ -15,8 +15,9 @@ Thanks for contributing!
    pnpm check
    pnpm build
    ```
-4. Push and open a PR referencing the issue (`Closes #N`).
-5. Wait for CI to pass and merge.
+4. Push and open a PR referencing the issue (`Closes #N` in the PR description and, ideally, in the commit body).
+5. Add a changeset if the PR is user-facing (`pnpm changeset`). Changesets describe what should be released and what version bump to apply.
+6. Wait for CI to pass and merge.
 
 ## Commit convention
 
