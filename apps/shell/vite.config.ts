@@ -8,9 +8,10 @@ export default defineConfig({
     federation({
       name: 'shell',
       remotes: {
-        home: 'home@http://localhost:3001/mf-manifest.json',
+        home: 'home@http://localhost:3001/remoteEntry.js',
       },
       shared: ['react', 'react-dom'],
+      dts: false,
     }),
   ],
   build: {
