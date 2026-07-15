@@ -14,13 +14,14 @@ Thanks for contributing!
 
    | Prefix | Use for |
    |---|---|
-   | `feature/` | New functionality |
-   | `bugfix/` | Bug fixes |
-   | `chore/` | Tooling, config, dependencies |
-   | `docs/` | Documentation only |
-   | `ci/` | CI/CD changes |
-   | `refactor/` | Code change with no behavior change |
-   | `test/` | Adding or updating tests |
+   | `feature/` | New functionality | ✨ enhancement |
+   | `bugfix/` | Bug fixes | 🐛 bug |
+   | `hotfix/` | Critical production fixes | 🚨 hotfix |
+   | `chore/` | Tooling, config, dependencies | 🔧 chore |
+   | `docs/` | Documentation only | 📚 documentation |
+   | `ci/` | CI/CD changes | 🔧 chore |
+   | `refactor/` | Code change with no behavior change | 🔧 chore |
+   | `test/` | Adding or updating tests | 🔧 chore |
 
    Example: `feature/add-authentication`, `ci/add-codeql`.
 
@@ -42,10 +43,10 @@ Thanks for contributing!
    Use the helper scripts for GitHub CLI:
    ```bash
    # Create issue + branch
-   bin/gh-issue bugfix "correct changeset package target"
+   bin/gh-issue hotfix "correct changeset package target"
 
    # After committing and pushing, create the PR
-   bin/gh-pr 18 bugfix/correct-changeset-package-target
+   bin/gh-pr 18 hotfix/correct-changeset-package-target
    ```
 
 6. Add a changeset if the PR is user-facing (`pnpm changeset`). Changesets describe what should be released and what version bump to apply.
