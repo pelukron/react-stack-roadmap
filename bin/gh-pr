@@ -30,6 +30,7 @@ EMOJI=""
 case "$BRANCH" in
   feature/*) EMOJI="✨" ;;
   bugfix/*) EMOJI="🐛" ;;
+  hotfix/*) EMOJI="🚨" ;;
   docs/*) EMOJI="📚" ;;
   chore/*|ci/*|refactor/*|test/*) EMOJI="🔧" ;;
   *) EMOJI="📝" ;;

@@ -19,7 +19,7 @@ fi
 
 USAGE="Usage: $(basename "$0") <type> <title> [body]
 
-type: feature | bugfix | chore | docs | ci | refactor | test
+type: feature | bugfix | hotfix | chore | docs | ci | refactor | test
 title: short issue/pr title
 body: optional issue description (defaults to title)"
 
@@ -33,7 +33,7 @@ TITLE="$2"
 BODY="${3:-$TITLE}"
 
 # Validate type
-VALID_TYPES="feature bugfix chore docs ci refactor test"
+VALID_TYPES="feature bugfix hotfix chore docs ci refactor test"
 if ! echo "$VALID_TYPES" | grep -qw "$TYPE"; then
   echo "Error: invalid type '$TYPE'. Must be one of: $VALID_TYPES" && exit 1
 fi
@@ -54,6 +54,7 @@ LABEL=""
 case "$TYPE" in
   feature) LABEL="✨ enhancement" ;;
   bugfix) LABEL="🐛 bug" ;;
+  hotfix) LABEL="🚨 hotfix" ;;
   docs) LABEL="📚 documentation" ;;
   chore|ci|refactor|test) LABEL="🔧 chore" ;;
   *) LABEL="" ;;
@@ -71,6 +72,7 @@ EMOJI=""
 case "$TYPE" in
   feature) EMOJI="✨" ;;
   bugfix) EMOJI="🐛" ;;
+  hotfix) EMOJI="🚨" ;;
   docs) EMOJI="📚" ;;
   chore|ci|refactor|test) EMOJI="🔧" ;;
   *) EMOJI="📝" ;;
