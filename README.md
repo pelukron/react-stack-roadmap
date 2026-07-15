@@ -32,8 +32,8 @@ react-stack-roadmap/
 | `turbo.json` | Orchestrates tasks across workspaces, handles cache and dependencies (`build` depends on `^build`). |
 | `biome.json` | Local entry point that extends `@rsm/config/biome.json`. |
 | `.github/workflows/ci.yml` | CI: installs pnpm/Node, runs `pnpm check` and `pnpm build` on PRs and pushes to `main`. |
-| `.github/workflows/release.yml` | Changesets release workflow: version bump + release PR. |
-| `.github/ISSUE_TEMPLATE/` | Bug report and feature request forms. |
+| `.github/workflows/release.yml` | Auto-creates GitHub release on tag push (`v*`), extracts notes from CHANGELOG. |
+| `.github/ISSUE_TEMPLATE/` | Bug report, feature request and hotfix forms. |
 | `.github/CODEOWNERS` | Repo owner: `@pelukron`. |
 | `CONTRIBUTING.md` | Workflow, commit convention, helper scripts, release settings. |
 | `AGENTS.md` | Agent instructions for this repo. |
@@ -51,6 +51,7 @@ pnpm check        # lint + typecheck + test
 
 bin/gh-issue <type> <title> [body]   # create issue + branch
 bin/gh-pr <issue-number> <branch>    # create linked PR
+bin/bump-version <major|minor|patch> # bump version, tag, push + create release
 ```
 
 ## Stack
@@ -63,35 +64,52 @@ bin/gh-pr <issue-number> <branch>    # create linked PR
 
 ## Roadmap blocks
 
-Learning sessions are organized as weekly blocks. Each block is one or more PRs.
+Learning sessions organized as blocks. Each block is one epic issue + linked implementation PRs.
 
-| Block | Topic | Status |
-|-------|-------|--------|
-| 1 | Tooling & repo setup (monorepo, CI, quality gates, helper scripts) | ✅ Done |
-| 2 | Module Federation runtime: shell renders remote-home | 🔄 Next |
-| 3 | Routing: TanStack Router in shell + remote routes | 🔲 Pending |
-| 4 | Styling: Tailwind CSS + shadcn/ui | 🔲 Pending |
-| 5 | State: Zustand + TanStack Query | 🔲 Pending |
-| 6 | Data fetching: REST vs GraphQL comparison | 🔲 Pending |
-| 7 | SSR / RSC comparison: Next.js app alongside Vite | 🔲 Pending |
-| 8 | Performance optimization (code splitting, lazy loading, render patterns) | 🔲 Pending |
-| 9 | Testing strategy (unit, integration, E2E with Playwright) | 🔲 Pending |
-| 10 | i18n, a11y and forms | 🔲 Pending |
-| 11 | Auth patterns | 🔲 Pending |
-| 12 | Deployment, CI/CD and monitoring | 🔲 Pending |
-| 13 | Security and hardening | 🔲 Pending |
+| Block | Topic | Epic | Status |
+|-------|-------|------|--------|
+| 1 | Tooling & repo setup | [#1](https://github.com/pelukron/react-stack-roadmap/issues/1) | ✅ Done |
+| 2 | Module Federation: shell renders remote-home | [#29](https://github.com/pelukron/react-stack-roadmap/issues/29) | 🔄 In progress |
+| 3 | Routing: TanStack Router in shell + remote routes | — | 🔲 Pending |
+| 4 | Styling: Tailwind CSS + shadcn/ui | — | 🔲 Pending |
+| 5 | State: Zustand + TanStack Query | — | 🔲 Pending |
+| 6 | Data fetching: REST vs GraphQL comparison | — | 🔲 Pending |
+| 7 | SSR / RSC comparison: Next.js alongside Vite | — | 🔲 Pending |
+| 8 | Performance optimization | — | 🔲 Pending |
+| 9 | Testing strategy (unit, integration, E2E) | — | 🔲 Pending |
+| 10 | i18n, a11y and forms | — | 🔲 Pending |
+| 11 | Auth patterns | — | 🔲 Pending |
+| 12 | Deployment, CI/CD and monitoring | — | 🔲 Pending |
+| 13 | Security and hardening | — | 🔲 Pending |
 
-## This week (week of 2026-07-14)
+### Block 1: Tooling & repo setup ✅
 
-| Day | Block | Goal | Deliverable |
-|-----|-------|------|-------------|
-| Tue | 1 | Close tooling; fix CI/release; document helpers | ✅ Done |
-| Wed | 2 | Shell loads and renders `remote-home` | PR to `main` |
-| Thu | 2 | Add navigation between shell and remote; shared layout | PR to `main` |
-| Fri | 3 | Add TanStack Router in shell + remote routes | PR to `main` |
+| # | Issue | PR |
+|---|-------|-----|
+| #1 | [chore: setup CI, issue templates and branch protection](https://github.com/pelukron/react-stack-roadmap/issues/1) | #2 |
+| #15 | [chore: harden CI and add manual contribution guide](https://github.com/pelukron/react-stack-roadmap/issues/15) | #16 |
+| #23 | [docs: fix contributing and agents documentation](https://github.com/pelukron/react-stack-roadmap/issues/23) | #24 |
+| #25 | [docs: update README with roadmap blocks](https://github.com/pelukron/react-stack-roadmap/issues/25) | #26 |
+| #35 | [chore: unify emoji labels, hotfix workflow and helpers](https://github.com/pelukron/react-stack-roadmap/issues/35) | — |
+| #40 | [chore: remove changesets and automated npm release](https://github.com/pelukron/react-stack-roadmap/issues/40) | #44 |
+| #43 | [chore: simplify release workflow to GitHub tags](https://github.com/pelukron/react-stack-roadmap/issues/43) | #44 |
+| #47 | [docs: add CHANGELOG.md and release notes convention](https://github.com/pelukron/react-stack-roadmap/issues/47) | #48 |
+| #52 | [ci: automate GitHub release creation](https://github.com/pelukron/react-stack-roadmap/issues/52) | #53 |
+
+### Block 2: Module Federation 🔄
+
+| # | Issue | PR |
+|---|-------|-----|
+| #29 | [feat: shell renders remote-home via Module Federation](https://github.com/pelukron/react-stack-roadmap/issues/29) | [#32](https://github.com/pelukron/react-stack-roadmap/pull/32) |
+| #36 | [docs: implementation guide for Module Federation block](https://github.com/pelukron/react-stack-roadmap/issues/36) | [#51](https://github.com/pelukron/react-stack-roadmap/pull/51) |
+
+### Block 3: TanStack Router 🔲
+
+Epic issue pending. Will cover routing in shell + remote routes.
 
 ## Next steps
 
-See `ARCHITECTURE.md` for data flow details, design decisions and development notes.
+- Merge [#32](https://github.com/pelukron/react-stack-roadmap/pull/32) — shell renders remote-home via Module Federation.
+- Start Block 3: create epic for TanStack Router integration.
 
-Start block 2: make `apps/shell` load and render `apps/remote-home` via Module Federation at runtime.
+See [ARCHITECTURE.md](ARCHITECTURE.md) for data flow details, design decisions and development notes.
