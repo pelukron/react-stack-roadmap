@@ -1,0 +1,74 @@
+name: Epic
+description: Parent issue tracking a group of related sub-issues (Jira-style epic)
+title: '[Epic] '
+labels: ['👑 epic']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Epic Overview
+        An epic groups related issues under a common goal. Each sub-issue is linked below.
+  - type: input
+    id: goal
+    attributes:
+      label: Goal
+      description: One sentence describing what this epic achieves.
+      placeholder: 'e.g. Set up monorepo with CI, quality gates and helper scripts'
+    validations:
+      required: true
+  - type: textarea
+    id: success
+    attributes:
+      label: Success criteria
+      description: How do we know this epic is done?
+      placeholder: |
+        - [ ] Criteria 1
+        - [ ] Criteria 2
+    validations:
+      required: true
+  - type: textarea
+    id: subissues
+    attributes:
+      label: Sub-issues
+      description: |
+        Checklist of linked issues. Use `- [ ] #N` syntax — GitHub auto-links.
+        Add new entries as you create sub-issues.
+      placeholder: |
+        - [ ] #1 Description of first sub-issue
+        - [ ] #2 Description of second sub-issue
+    validations:
+      required: false
+  - type: dropdown
+    id: milestone
+    attributes:
+      label: Target milestone
+      description: Which milestone does this epic belong to?
+      options:
+        - 'No milestone yet (create one)'
+        - 'v0.1.0 — MVP'
+        - 'v0.2.0 — Features'
+        - 'v0.3.0 — Production'
+    validations:
+      required: false
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - 'p0 · critical'
+        - 'p1 · high'
+        - 'p2 · medium'
+        - 'p3 · low'
+    validations:
+      required: true
+  - type: textarea
+    id: manual
+    attributes:
+      label: Manual steps (if no tokens / CLI)
+      description: How to work on this epic without GitHub tokens or CLI access.
+      placeholder: |
+        1. Create sub-issues manually via GitHub web UI
+        2. Link them in the checklist above
+        3. Use GitHub Projects board to track progress
+    validations:
+      required: false
