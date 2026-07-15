@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+cd "$REPO_ROOT"
+
+BUMP="${1:-}"
+if [[ -z "$BUMP" ]]; then
+  echo "Usage: bin/bump-version (major|minor|patch)"
+  exit 1
+fi
+
+if [[ "$BUMP" != "major" && "$BUMP" != "minor" && "$BUMP" != "patch" ]]; then
+  echo "Error: bump must be major, minor, or patch"
+  exit 1
+fi
+
+CURRENT=$(node -p "require('./package.json').version")
+MAJOR=$(echo "$CURRENT" | cut -d. -f1)
+MINOR=$(echo "$CURRENT" | cut -d. -f2)
+PATCH=$(echo "$CURRENT" | cut -d. -f3)
+
+case "$BUMP" in
+  major) MAJOR=$((MAJOR + 1)); MINOR=0; PATCH=0 ;;
+  minor) MINOR=$((MINOR + 1)); PATCH=0 ;;
+  patch) PATCH=$((PATCH + 1)) ;;
+esac
+
+NEW="${MAJOR}.${MINOR}.${PATCH}"
+node -e "
+  const fs = require('fs');
+  const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+  pkg.version = '$NEW';
+  fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+"
+
+git add package.json
+git commit -m "chore: bump version to v$NEW"
+git tag "v$NEW"
+git push origin "v$NEW"
+
+echo "Created and pushed tag v$NEW"
+echo "Create a release at: https://github.com/pelukron/react-stack-roadmap/releases/new?tag=v$NEW"
