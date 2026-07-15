@@ -49,9 +49,8 @@ Thanks for contributing!
    bin/gh-pr 18 hotfix/correct-changeset-package-target
    ```
 
-6. Add a changeset if the PR is user-facing (`pnpm changeset`). Changesets describe what should be released and what version bump to apply.
-7. Wait for CI to pass and for review/approval from the code owner.
-8. Merge. Do **not** keep long-lived implementation plans in the repo; the issue and PR history already capture the full context.
+6. Wait for CI to pass and for review/approval from the code owner.
+7. Merge. Do **not** keep long-lived implementation plans in the repo; the issue and PR history already capture the full context.
 
 ## Commit convention
 
@@ -66,29 +65,20 @@ Use Conventional Commits:
 
 ## Release workflow
 
-This repo uses [Changesets](https://github.com/changesets/changesets) to automate versioning and releases via `.github/workflows/release.yml`.
+This repo uses manual GitHub releases and semver tags.
 
-When a changeset is present on `main`, the Release workflow:
-1. Runs `changeset version` to bump package versions and generate changelogs.
-2. Pushes the result to a `changeset-release/main` branch.
-3. Opens a release PR with `chore: version packages`.
-4. When that PR is merged, it publishes the release.
+1. Decide bump type:
+   - `major` — breaking changes
+   - `minor` — new features, backward compatible
+   - `patch` — bug fixes
+2. Run the helper script (or bump the root `package.json` version manually and create the tag yourself):
+   ```bash
+   bin/bump-version patch
+   ```
+3. Create a GitHub release from the pushed tag at:
+   https://github.com/pelukron/react-stack-roadmap/releases/new
 
-### Required repository setting
-
-GitHub Actions needs permission to create and approve pull requests. Without it the Release workflow fails with:
-
-```
-HttpError: GitHub Actions is not permitted to create or approve pull requests.
-```
-
-Enable this in the repository settings:
-
-1. Go to **Settings → Actions → General**.
-2. Under **Workflow permissions**, check **Allow GitHub Actions to create and approve pull requests**.
-3. Click **Save**.
-
-Until this is enabled, the version bump will be pushed to `changeset-release/main` but the PR must be opened manually via [this link](https://github.com/pelukron/react-stack-roadmap/pull/new/changeset-release/main).
+No npm publishing or Changesets configuration is required.
 
 ## No force-push / amend
 
@@ -118,6 +108,7 @@ Project documentation and GitHub templates are maintained in English. Commit mes
 | `pnpm lint` | Run Biome on all packages |
 | `bin/gh-issue` | Create issue + linked branch (GitHub CLI) |
 | `bin/gh-pr` | Create PR from branch linked to issue (GitHub CLI) |
+| `bin/bump-version` | Bump root version, create tag, push to origin |
 
 ## Manual contribution workflow (no GitHub token / CLI)
 
