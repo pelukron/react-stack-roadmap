@@ -9,7 +9,7 @@ When working in this repository, follow these rules.
 - `apps/remote-home`: remote micro-frontend exposed via Module Federation.
 - `packages/config`: shared Biome config and TypeScript base config.
 - GitHub Actions CI runs `pnpm check` and `pnpm build` on every PR and push to `main`.
-- Release automation via `Changesets`.
+- Manual GitHub releases with semver tags. See `CONTRIBUTING.md` for the release workflow.
 
 ## Before declaring a change done
 
@@ -68,8 +68,7 @@ The repo provides `bin/gh-issue` and `bin/gh-pr` to create issues and linked PRs
 - Create an issue first, then a branch, then a PR.
 - One logical change per PR.
 - Update `CHANGELOG.md` if the change is user-facing.
-- Add a changeset (`pnpm changeset`) if the PR changes packages that should be released.
-- Do not use `git commit --amend` or `git push --force` after the branch has been pushed.
+- Do not use `git commit --amend` or `git push --force` after the branch has been pushed. Every change must be in its own commit so PR history is fully traceable.
 
 ## Language
 
