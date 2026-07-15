@@ -15,8 +15,8 @@ The monorepo (`pnpm` + `Turbo`) reduces friction for daily learning sessions: cr
 └─────────────┘                               └──────────────┘
 ```
 
-- **`apps/shell`**: the host. Declares in `vite.config.ts` that `home` is a remote. At runtime, the browser requests `mf-manifest.json` from `localhost:3001` to know what is exposed.
-- **`apps/remote-home`**: the remote. In `vite.config.ts` exposes `./App` as `./App` (or `HomeRemote`). Serves its own `remoteEntry.js`.
+- **`apps/shell`**: the host. Declares in `vite.config.ts` that `home` is a remote. At runtime, the browser requests `remoteEntry.js` from `localhost:3001` to load the federated module.
+- **`apps/remote-home`**: the remote. In `vite.config.ts` exposes `./App`. Serves its own `remoteEntry.js`.
 - **`@module-federation/vite`**: Vite plugin that resolves both host and remote without depending on Webpack/Rspack.
 - **Shared deps**: `react` and `react-dom` are marked as shared so they are not loaded twice.
 
@@ -72,4 +72,3 @@ Each app extends `tsconfig.base.json` and adds its own paths and included files.
 ## Known issues
 
 - The branch protection ruleset for `main` was created via API without required status checks; `check` must be added manually in GitHub Settings once CI has run on at least one PR.
-- The remote is currently exposed but the shell does not render it yet; that will be the next roadmap step.
