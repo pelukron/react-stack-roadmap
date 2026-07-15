@@ -124,6 +124,8 @@ Project documentation and GitHub templates are maintained in English. Commit mes
 | `bin/gh-issue` | Create issue + linked branch (GitHub CLI) |
 | `bin/gh-pr` | Create PR from branch linked to issue (GitHub CLI) |
 | `bin/bump-version` | Bump root version, create tag, push to origin |
+| `bin/pm-status` | Quick standup report: milestones, epics, blocked items |
+| `bin/pm-weekly` | Weekly digest: stats, PRs merged, issues created/closed |
 
 ## Manual contribution workflow (no GitHub token / CLI)
 
