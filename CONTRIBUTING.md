@@ -71,12 +71,17 @@ This repo uses manual GitHub releases and semver tags.
    - `major` — breaking changes
    - `minor` — new features, backward compatible
    - `patch` — bug fixes
-2. Run the helper script (or bump the root `package.json` version manually and create the tag yourself):
+2. Update `CHANGELOG.md`:
+   - Add a new section for the bumped version under `## [Unreleased]`.
+   - Move the released changes from `[Unreleased]` to the new version section.
+3. Run the helper script (or bump the root `package.json` version manually and create the tag yourself):
    ```bash
    bin/bump-version patch
    ```
-3. Create a GitHub release from the pushed tag at:
+4. Create a GitHub release from the pushed tag at:
    https://github.com/pelukron/react-stack-roadmap/releases/new
+
+When writing the GitHub release body, summarize why the version was bumped and link to the PR that triggered the release. Keep `CHANGELOG.md` as the source of truth for the full history.
 
 No npm publishing or Changesets configuration is required.
 
