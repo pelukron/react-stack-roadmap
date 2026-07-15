@@ -36,10 +36,11 @@ If any step fails, fix the issue before committing or pushing.
 Use Conventional Commits:
 
 - `feat:` new feature
+- `hotfix:` critical production fix
 - `fix:` bug fix
 - `chore:` tooling, config, dependencies
 - `docs:` documentation only
-- `refactor:` code change with no behavior change
+- `refactor:` code change that neither fixes a bug nor adds a feature
 - `test:` adding or updating tests
 - `ci:` CI/CD changes
 
@@ -49,6 +50,7 @@ Use GitHub Flow naming convention:
 
 - `feature/<short-name>`
 - `bugfix/<short-name>`
+- `hotfix/<short-name>`
 - `chore/<short-name>`
 - `docs/<short-name>`
 - `ci/<short-name>`
