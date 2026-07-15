@@ -42,10 +42,9 @@ This PR addresses #${ISSUE_NUM}.
 
 ## Checklist
 - [ ] I ran \`pnpm check\`
-- [ ] I ran \`pnpm build\`
-- [ ] I added a changeset if this change is user-facing (\`pnpm changeset\`)"
+- [ ] I ran \`pnpm build\`"
 
 echo "Creating PR for branch '$BRANCH' linked to issue #$ISSUE_NUM..."
-gh pr create --title "${EMOJI} ${TITLE}" --body "$BODY" --label "$LABELS" --base main --head "$BRANCH"
+gh pr create --title "${EMOJI} ${TITLE} (#${ISSUE_NUM})" --body "$BODY" --label "$LABELS" --base main --head "$BRANCH"
 
 echo "✅ Done."
