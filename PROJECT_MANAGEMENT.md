@@ -2,6 +2,147 @@
 
 Jira-style project management for this repo using GitHub-native features.
 
+## 🚀 Quick Start / Mini Tour
+
+> _Esta guía funciona desde cualquier máquina, con o sin CLI configurado. Todo se puede hacer desde la web de GitHub._
+
+### 📍 Donde está todo
+
+| Recurso | Link |
+|---|---|
+| **Project Board** (kanban) | [github.com/users/pelukron/projects/2](https://github.com/users/pelukron/projects/2) |
+| **Milestones** | [github.com/pelukron/react-stack-roadmap/milestones](https://github.com/pelukron/react-stack-roadmap/milestones) |
+| **Epics abiertos** | [Issues labeled `👑 epic`](https://github.com/pelukron/react-stack-roadmap/issues?q=is%3Aissue+label%3A%22👑+epic%22+is%3Aopen) |
+| **Roadmap** (README) | [README.md#roadmap-blocks](README.md#roadmap-blocks) |
+| **Documentación** | [PROJECT_MANAGEMENT.md](PROJECT_MANAGEMENT.md) (este archivo) |
+
+---
+
+### 🎯 Crear un nuevo bloque (epic) — desde la web
+
+1. Ve a [Issues → New Issue](https://github.com/pelukron/react-stack-roadmap/issues/new/choose)
+2. Selecciona el template **Epic**
+3. Llena:
+   - **Title**: `[Epic] Nombre del bloque`
+   - **Goal**: Una frase de lo que se logra
+   - **Success criteria**: Checklist de cómo saber que está terminado
+   - **Priority**: `p0` (crítico) a `p3` (baja)
+4. Click **Submit new issue**
+5. Asígnale un milestone desde la barra derecha del issue
+6. Agrega labels manualmente: `size: M`, etc.
+
+---
+
+### 🎯 Crear epic — desde CLI
+
+```bash
+# 1. Crear el epic
+gh issue create --template epic
+
+# 2. Agregar labels
+gh issue edit <N> --add-label "👑 epic,priority: p1 · high,size: M"
+
+# 3. Asignar milestone
+gh issue edit <N> --milestone "v0.1.0 — MVP"
+
+# 4. Agregar al Project Board
+gh project item-add 2 --owner pelukron --url "https://github.com/pelukron/react-stack-roadmap/issues/<N>"
+```
+
+---
+
+### 📝 Agregar sub-issues (tareas hijas)
+
+**Desde la web:**
+1. Abre el epic issue
+2. Crea un nuevo issue normal (feature/bug/chore)
+3. Copia el link y pégalo en el checklist del epic: `- [ ] #N Descripción`
+
+**Desde CLI:**
+```bash
+# Crear sub-issue
+gh issue create --title "feat: descripción" --body "..." --label "✨ enhancement,size: S"
+
+# Editar el body del epic para agregarlo al checklist
+gh issue edit <EPIC_N> --body "$(gh issue view <EPIC_N> --json body --jq '.body')\n- [ ] #<N> descripción"
+```
+
+---
+
+### 📋 Usar el Project Board
+
+El board tiene 3 vistas (tabs en la web):
+
+| Vista | Para qué sirve |
+|---|---|
+| **Board** | Kanban: arrastra tarjetas entre `Todo → In Progress → Done` |
+| **Roadmap** | Línea de tiempo con milestones y fechas límite |
+| **Table** | Vista hoja de cálculo, agrupa por Block/Priority/Size |
+
+**Campos custom en cada tarjeta:**
+- `Priority`: 🔴 p0 → ⚪ p3
+- `Size`: XS → XL
+- `Block`: número de bloque (1-13)
+- `Status`: Todo / In Progress / Done
+
+---
+
+### 🔄 Flujo completo: de idea a done
+
+```
+1. Idea ──→ Crear Epic Issue (template epic)
+              ├── Goal + Success criteria
+              ├── Label: 👑 epic + priority + size
+              └── Milestone: v0.X.0
+
+2. Plan ──→ Crear sub-issues
+              ├── Un issue por cada tarea concreta
+              ├── Label: ✨ enhancement / 🐛 bug / 📚 docs
+              └── Agregar al checklist del epic
+
+3. Work ──→ Project Board
+              ├── Agregar issues al board (gh project item-add)
+              ├── Mover tarjetas: Todo → In Progress → Done
+              └── Actualizar checklist del epic
+
+4. Done ──→ Cerrar epic cuando todo el checklist esté ✅
+```
+
+---
+
+### ⚡ Comandos frecuentes
+
+```bash
+# Ver todos los epics
+gh issue list --label "👑 epic"
+
+# Ver progreso de un milestone
+gh api repos/pelukron/react-stack-roadmap/milestones/1 --jq '{title, open_issues, closed_issues}'
+
+# Abrir el board en el navegador
+gh project view 2 --owner pelukron --web
+
+# Ver items en el board
+gh project item-list 2 --owner pelukron
+
+# Crear un issue y agregarlo al board en un paso
+gh issue create --title "feat: algo" --label "✨ enhancement,size: S" --milestone "v0.1.0 — MVP"
+gh project item-add 2 --owner pelukron --url "https://github.com/pelukron/react-stack-roadmap/issues/<N>"
+```
+
+---
+
+### 🔑 Sin token / Sin CLI
+
+Todo se puede hacer desde la web de GitHub:
+1. **Crear epic:** [Issues → New Issue → Epic template](https://github.com/pelukron/react-stack-roadmap/issues/new/choose)
+2. **Project Board:** [github.com/users/pelukron/projects/2](https://github.com/users/pelukron/projects/2)
+3. **Milestones:** [github.com/pelukron/react-stack-roadmap/milestones](https://github.com/pelukron/react-stack-roadmap/milestones)
+4. **Labels:** Agregar manualmente desde la barra derecha de cada issue
+5. **Agregar al board:** Abre el issue → botón derecho "Projects" → selecciona "React Stack Roadmap"
+
+---
+
 ## Overview
 
 ```
