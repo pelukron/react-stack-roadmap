@@ -41,4 +41,14 @@ git tag "v$NEW"
 git push origin "v$NEW"
 
 echo "Created and pushed tag v$NEW"
-echo "Create a release at: https://github.com/pelukron/react-stack-roadmap/releases/new?tag=v$NEW"
+
+# Create GitHub release (optional: run manually or via CI workflow)
+if command -v gh &>/dev/null && gh auth status &>/dev/null; then
+  gh release create "v$NEW" \
+    --title "v$NEW" \
+    --notes "See [CHANGELOG.md](https://github.com/pelukron/react-stack-roadmap/blob/main/CHANGELOG.md) for details." \
+    --verify-tag
+  echo "GitHub release created: https://github.com/pelukron/react-stack-roadmap/releases/tag/v$NEW"
+else
+  echo "gh CLI not available. Create release at: https://github.com/pelukron/react-stack-roadmap/releases/new?tag=v$NEW"
+fi
