@@ -257,3 +257,38 @@ gh api repos/pelukron/react-stack-roadmap/milestones/1 --jq '{title, open_issues
 - [AGENTS.md](AGENTS.md) — Agent instructions for this repo
 - [ARCHITECTURE.md](ARCHITECTURE.md) — Technical decisions and data flow
 - [README.md](README.md) — Roadmap blocks and issue mapping
+
+## 🤖 Hermes Agent Contributor
+
+This repo uses a separate git identity for AI agent contributions.
+
+### Identity
+
+| Campo | Diego (humano) | Hermes Agent (bot) |
+|---|---|---|
+| **git user.name** | `Diego Moreno` | `Hermes Agent` |
+| **git user.email** | `diego@example.com` | `hermes-agent@nousresearch.com` |
+| **GitHub login** | `pelukron` | — (sin cuenta) |
+| **Permisos** | Admin + merge | PRs y commits |
+| **Alcance** | Global (~/.gitconfig) | Solo este repo (--local) |
+
+### Setup (al clonar en otra máquina)
+
+```bash
+cd react-stack-roadmap
+
+# Identidad del bot (solo este repo)
+git config --local user.name "Hermes Agent"
+git config --local user.email "hermes-agent@nousresearch.com"
+
+# Verificar
+git config --local user.name   # → Hermes Agent
+git config --global user.name  # → Diego Moreno (intacto)
+```
+
+### Reglas
+
+- **Hermes Agent** crea branches, commits y PRs
+- **@pelukron** revisa, aprueba y mergea
+- Prohibido: `--force`, `--amend` después de push
+- Un commit por cambio lógico
