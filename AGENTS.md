@@ -66,6 +66,7 @@ The repo provides `bin/gh-issue` and `bin/gh-pr` to create issues and linked PRs
 ## Pull requests
 
 - Create an issue first, then a branch, then a PR.
+- Every PR body must include `Closes #N` linking to its issue.
 - One logical change per PR.
 - Update `CHANGELOG.md` if the change is user-facing.
 - Do not use `git commit --amend` or `git push --force` after the branch has been pushed. Every change must be in its own commit so PR history is fully traceable.

@@ -226,11 +226,26 @@ Custom fields configured:
 3. Move cards: `Todo → In Progress → In Review → Done`
 4. Use Roadmap view to see milestones on timeline
 
-## Automation ideas (future)
+## Automation ✅
 
-- GitHub Actions workflow to auto-add new `👑 epic` issues to the project
+### Auto-add to Project Board
+
+New issues labeled `👑 epic` are automatically added to the [Project Board](https://github.com/users/pelukron/projects/2).
+
+**Workflow:** `.github/workflows/project-automation.yml`
+**Trigger:** issue labeled `👑 epic`
+**Requires:** `PROJECT_PAT` secret with `project` scope
+
+```bash
+# Set up the secret (one-time)
+gh secret set PROJECT_PAT --body "ghp_..." --repo pelukron/react-stack-roadmap
+```
+
+### Ideas (future)
+
 - Auto-close epic when all sub-issues are closed
 - Auto-assign milestone based on label
+- Weekly digest script (`bin/pm-weekly-digest`)
 
 ## CLI quick reference
 
