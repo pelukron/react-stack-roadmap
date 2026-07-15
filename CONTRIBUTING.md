@@ -65,23 +65,33 @@ Use Conventional Commits:
 
 ## Release workflow
 
-This repo uses manual GitHub releases and semver tags.
+This repo uses manual GitHub releases and semver tags. Releases are created automatically via CI when a version tag is pushed.
 
-1. Decide bump type:
-   - `major` — breaking changes
-   - `minor` — new features, backward compatible
-   - `patch` — bug fixes
-2. Update `CHANGELOG.md`:
-   - Add a new section for the bumped version under `## [Unreleased]`.
-   - Move the released changes from `[Unreleased]` to the new version section.
-3. Run the helper script (or bump the root `package.json` version manually and create the tag yourself):
+### Option A: Automated (recommended)
+
+1. Update `CHANGELOG.md`: move changes from `[Unreleased]` to a new version section.
+2. Run the bump script (it tags, pushes, AND creates the GitHub release):
    ```bash
    bin/bump-version patch
    ```
-4. Create a GitHub release from the pushed tag at:
-   https://github.com/pelukron/react-stack-roadmap/releases/new
+   If `gh` CLI is authenticated, the release is created automatically. Otherwise, a manual link is printed.
 
-When writing the GitHub release body, summarize why the version was bumped and link to the PR that triggered the release. Keep `CHANGELOG.md` as the source of truth for the full history.
+3. That's it — a `.github/workflows/release.yml` also triggers on tag push to create the release via CI.
+
+### Option B: Manual (no gh CLI)
+
+1. Decide bump type: `major`, `minor`, or `patch`.
+2. Update `CHANGELOG.md` and bump `package.json` version.
+3. Create and push the tag:
+   ```bash
+   git tag v0.2.0
+   git push origin v0.2.0
+   ```
+4. CI auto-creates the GitHub release from the tag.
+
+### Release notes
+
+Release body is auto-extracted from `CHANGELOG.md` for the matching version. Keep `CHANGELOG.md` as the source of truth.
 
 No npm publishing or Changesets configuration is required.
 
