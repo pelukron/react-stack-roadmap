@@ -49,11 +49,35 @@ if [[ ! "$REPLY" =~ ^[Yy]$ ]]; then
   exit 0
 fi
 
-# Create issue
-ISSUE_URL=$(gh issue create --title "$TITLE" --body "$BODY")
+# Create issue with label based on type (labels are plain; emojis live in GitHub label descriptions)
+LABEL=""
+case "$TYPE" in
+  feature) LABEL="✨ enhancement" ;;
+  bugfix) LABEL="🐛 bug" ;;
+  docs) LABEL="📚 documentation" ;;
+  chore|ci|refactor|test) LABEL="🔧 chore" ;;
+  *) LABEL="" ;;
+esac
+
+LABEL_ARGS=""
+if [ -n "$LABEL" ]; then
+  LABEL_ARGS="--label $LABEL"
+fi
+
+ISSUE_URL=$(gh issue create --title "$TITLE" --body "$BODY" $LABEL_ARGS)
 ISSUE_NUM=$(echo "$ISSUE_URL" | grep -oE '[0-9]+$')
 
-echo "Created issue #$ISSUE_NUM: $ISSUE_URL"
+EMOJI=""
+case "$TYPE" in
+  feature) EMOJI="✨" ;;
+  bugfix) EMOJI="🐛" ;;
+  docs) EMOJI="📚" ;;
+  chore|ci|refactor|test) EMOJI="🔧" ;;
+  *) EMOJI="📝" ;;
+esac
+
+echo "🎉 Created issue #$ISSUE_NUM: $ISSUE_URL"
+echo "Labels: $LABEL"
 
 # Ensure main is up to date
 git checkout main

@@ -23,6 +23,17 @@ if ! git rev-parse --abbrev-ref --symbolic-full-name "@{u}" &> /dev/null 2>&1; t
 fi
 
 TITLE=$(gh issue view "$ISSUE_NUM" --json title --jq '.title')
+LABELS=$(gh issue view "$ISSUE_NUM" --json labels --jq '.labels[].name' | paste -sd "," -)
+
+# Prefix PR title with emoji based on branch prefix
+EMOJI=""
+case "$BRANCH" in
+  feature/*) EMOJI="✨" ;;
+  bugfix/*) EMOJI="🐛" ;;
+  docs/*) EMOJI="📚" ;;
+  chore/*|ci/*|refactor/*|test/*) EMOJI="🔧" ;;
+  *) EMOJI="📝" ;;
+esac
 
 BODY="Closes #${ISSUE_NUM}
 
@@ -34,6 +45,6 @@ This PR addresses #${ISSUE_NUM}.
 - [ ] I added a changeset if this change is user-facing (\`pnpm changeset\`)"
 
 echo "Creating PR for branch '$BRANCH' linked to issue #$ISSUE_NUM..."
-gh pr create --title "$TITLE" --body "$BODY" --base main --head "$BRANCH"
+gh pr create --title "${EMOJI} ${TITLE}" --body "$BODY" --label "$LABELS" --base main --head "$BRANCH"
 
-echo "Done."
+echo "✅ Done."
