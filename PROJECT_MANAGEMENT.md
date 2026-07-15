@@ -52,20 +52,23 @@ Epics are parent issues that group related sub-issues. They use the `👑 epic` 
 gh issue create --template epic
 ```
 
-## GitHub Project Board (manual setup required)
+## GitHub Project Board ✅
 
-> ⚠️ **Token scope needed:** The GH token needs the `project` scope to create/manage projects via API.
-> Add it with: `gh auth refresh -s project`
+> **Board URL:** [React Stack Roadmap](https://github.com/users/pelukron/projects/2)
 
-### Manual setup steps
+### Setup
 
-1. **Go to** https://github.com/pelukron/react-stack-roadmap/projects
-2. Click **New project** → choose **Board** template
-3. Name: `React Stack Roadmap`
-4. Add custom fields:
-   - `Priority` (Single select): `p0 · critical`, `p1 · high`, `p2 · medium`, `p3 · low`
-   - `Size` (Single select): `XS`, `S`, `M`, `L`, `XL`
-   - `Block` (Text): optional, for block reference
+Custom fields configured:
+- `Priority` (Single select): 🔴 p0 · critical, 🟠 p1 · high, 🟡 p2 · medium, ⚪ p3 · low
+- `Size` (Single select): XS, S, M, L, XL
+- `Block` (Text): Block reference number (1-13)
+
+### Current items
+
+| Item | Priority | Size | Block |
+|---|---|---|---|
+| [#1](https://github.com/pelukron/react-stack-roadmap/issues/1) Tooling & repo setup | 🔴 p0 | XL | 1 ✅ |
+| [#29](https://github.com/pelukron/react-stack-roadmap/issues/29) Module Federation | 🔴 p0 | L | 2 🔄 |
 
 ### Recommended views
 
