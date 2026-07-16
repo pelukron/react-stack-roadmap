@@ -63,3 +63,44 @@ jobs:
 
       - name: Build all apps
         run: pnpm build
+
+  notify:
+    name: Notificar Telegram
+    needs: build
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram message
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          STATUS="${{ needs.build.result }}"
+          REPO="${{ github.repository }}"
+          BRANCH="${{ github.ref_name }}"
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+          if [ "$STATUS" = "success" ]; then
+            EMOJI="✅"
+            STATUS_TEXT="PASÓ"
+          else
+            EMOJI="❌"
+            STATUS_TEXT="FALLÓ"
+          fi
+
+          # Detectar si es PR
+          PR_NUM="${{ github.event.pull_request.number }}"
+          if [ -n "$PR_NUM" ]; then
+            PR_LINE="%0APR: #${PR_NUM}%0A👉 ${{ github.server_url }}/${{ github.repository }}/pull/${PR_NUM}"
+          else
+            PR_LINE=""
+          fi
+
+          TEXT="${EMOJI} CI ${STATUS_TEXT}: ${REPO}%0A%0ARama: ${BRANCH}%0ACommit: ${{ github.sha }}${PR_LINE}%0A%0A🔗 ${RUN_URL}"
+
+          curl -s -X POST \
+            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -d "chat_id=${TELEGRAM_CHAT_ID}" \
+            -d "text=${TEXT}" \
+            -d "parse_mode=HTML" \
+            -d "disable_web_page_preview=true"
