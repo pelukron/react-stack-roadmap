@@ -51,21 +51,26 @@ gh project item-add 2 --owner pelukron --url "https://github.com/pelukron/react-
 
 ---
 
-### 📝 Agregar sub-issues (tareas hijas)
+### 📝 Agregar sub-issues (tareas hijas) — NATIVOS
 
 **Desde la web:**
 1. Abre el epic issue
-2. Crea un nuevo issue normal (feature/bug/chore)
-3. Copia el link y pégalo en el checklist del epic: `- [ ] #N Descripción`
+2. Scroll a "Sub-issues" → **Add sub-issue** → crea o selecciona
 
 **Desde CLI:**
 ```bash
-# Crear sub-issue
+# 1. Crear sub-issue
 gh issue create --title "feat: descripción" --body "..." --label "✨ enhancement,size: S"
 
-# Editar el body del epic para agregarlo al checklist
-gh issue edit <EPIC_N> --body "$(gh issue view <EPIC_N> --json body --jq '.body')\n- [ ] #<N> descripción"
+# 2. Linkear como sub-issue nativo (usa databaseId, NO el número)
+DB_ID=$(gh api repos/pelukron/react-stack-roadmap/issues/<N> --jq '.id')
+gh api -X POST repos/pelukron/react-stack-roadmap/issues/<EPIC_N>/sub_issues -F sub_issue_id=$DB_ID
+
+# 3. Verificar
+gh api repos/pelukron/react-stack-roadmap/issues/<EPIC_N>/sub_issues --jq '.[] | .number'
 ```
+
+> ⚠️ NO uses checklist manual `- [ ] #N` en el body — el progreso automático solo funciona con sub-issues nativos.
 
 ---
 
@@ -166,27 +171,86 @@ Epic Issue ──→ Milestone ──→ GitHub Project (kanban)
 
 | Milestone | Due | Scope |
 |---|---|---|
-| [v0.1.0 — MVP](https://github.com/pelukron/react-stack-roadmap/milestone/1) | 2026-07-31 | Blocks 1-3: Tooling + MF + Router |
-| [v0.2.0 — Core Stack](https://github.com/pelukron/react-stack-roadmap/milestone/2) | 2026-08-31 | Blocks 4-7: Styling, State, Data, SSR |
-| [v0.3.0 — Production Ready](https://github.com/pelukron/react-stack-roadmap/milestone/3) | 2026-10-15 | Blocks 8-13: Perf, Testing, Auth, Deploy |
+| [v0.1.0 — MVP](https://github.com/pelukron/react-stack-roadmap/milestone/1) | 2026-07-31 | Blocks 1-2: Tooling + MF |
+| [v0.2.0 — Core Stack](https://github.com/pelukron/react-stack-roadmap/milestone/2) | 2026-08-31 | Blocks 2.5, 3-6: Hardening, Router, Styling, State+Data, Deploy |
+| [v0.3.0 — Production Ready](https://github.com/pelukron/react-stack-roadmap/milestone/3) | 2026-10-15 | Blocks 7-10: Auth, SSR/RSC, Performance, i18n+Forms |
+| [v0.4.0 — Hardening](https://github.com/pelukron/react-stack-roadmap/milestone/4) | 2026-11-15 | Blocks 11-12: Advanced E2E, Security |
 
 ## Epic Issues
 
-Epics are parent issues that group related sub-issues. They use the `👑 epic` label and a checklist body.
+Epics are parent issues that group related sub-issues. They use the `👑 epic` label.
+
+### Native sub-issues (repo standard)
+
+This repo uses **native GitHub sub-issues** — not manual checklists in the epic body. Progress bars compute automatically in the GitHub UI.
+
+**Linking a sub-issue via API:**
+
+```bash
+# sub_issue_id is the issue's databaseId (integer), NOT the issue number
+DB_ID=$(gh api repos/pelukron/react-stack-roadmap/issues/<N> --jq '.id')
+gh api -X POST repos/pelukron/react-stack-roadmap/issues/<EPIC_N>/sub_issues -F sub_issue_id=$DB_ID
+```
+
+**Listing sub-issues of an epic:**
+
+```bash
+gh api repos/pelukron/react-stack-roadmap/issues/<EPIC_N>/sub_issues --jq '.[] | .number'
+```
+
+**From the web UI:** open the epic → "Add sub-issue" → pick or create.
+
+### Block numbering convention
+
+- Main blocks: `1, 2, 3, ... 12` — one per learning topic
+- Intermediate hardening/prep blocks: `X.Y` (e.g. **2.5**) — scoped inside the parent milestone, no roadmap renumbering
+
+### Epic body format (approved standard)
+
+```markdown
+## Goal
+<One paragraph — what and why>
+
+## Context
+- **Depends on:** <blocks>
+- **Unlocks:** <blocks>
+- <Key decisions>
+
+## Success criteria
+- [ ] <Measurable criterion>
+
+## Sub-issues plan
+1. <title> (size S/M/L)
+
+## Notes
+- <Technical decisions, alternatives, pitfalls>
+```
 
 ### Current epics
 
-| Epic | Milestone | Status |
-|---|---|---|
-| [#1](https://github.com/pelukron/react-stack-roadmap/issues/1) Tooling & repo setup | v0.1.0 | ✅ Done |
-| [#29](https://github.com/pelukron/react-stack-roadmap/issues/29) Module Federation | v0.1.0 | 🔄 In progress |
+| Epic | Block | Milestone | Status |
+|---|---|---|---|
+| [#1](https://github.com/pelukron/react-stack-roadmap/issues/1) Tooling & repo setup | 1 | v0.1.0 | ✅ Done |
+| [#29](https://github.com/pelukron/react-stack-roadmap/issues/29) Module Federation | 2 | v0.1.0 | 🔄 In progress |
+| [#84](https://github.com/pelukron/react-stack-roadmap/issues/84) Pre-Router architecture hardening | 2.5 | v0.2.0 | 🔲 Pending |
+| [#64](https://github.com/pelukron/react-stack-roadmap/issues/64) Routing + testing foundation | 3 | v0.2.0 | 🔲 Pending |
+| [#65](https://github.com/pelukron/react-stack-roadmap/issues/65) Styling + a11y + Storybook | 4 | v0.2.0 | 🔲 Pending |
+| [#66](https://github.com/pelukron/react-stack-roadmap/issues/66) State + Data unified | 5 | v0.2.0 | 🔲 Pending |
+| [#73](https://github.com/pelukron/react-stack-roadmap/issues/73) Deploy MFE + smoke E2E | 6 | v0.2.0 | 🔲 Pending |
+| [#72](https://github.com/pelukron/react-stack-roadmap/issues/72) Auth | 7 | v0.3.0 | 🔲 Pending |
+| [#68](https://github.com/pelukron/react-stack-roadmap/issues/68) SSR/RSC | 8 | v0.3.0 | 🔲 Pending |
+| [#69](https://github.com/pelukron/react-stack-roadmap/issues/69) Performance | 9 | v0.3.0 | 🔲 Pending |
+| [#71](https://github.com/pelukron/react-stack-roadmap/issues/71) i18n + Forms | 10 | v0.3.0 | 🔲 Pending |
+| [#70](https://github.com/pelukron/react-stack-roadmap/issues/70) Advanced E2E | 11 | v0.4.0 | 🔲 Pending |
+| [#74](https://github.com/pelukron/react-stack-roadmap/issues/74) Security & hardening | 12 | v0.4.0 | 🔲 Pending |
 
 ### Creating a new epic
 
 1. Go to Issues → New Issue → **Epic** template
-2. Fill in goal, success criteria, and sub-issues checklist
+2. Fill in goal, success criteria using the approved format above
 3. Assign to a milestone
 4. Add priority and size labels
+5. Create sub-issues as the block activates, link them natively (API or UI)
 
 ```bash
 # CLI alternative

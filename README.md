@@ -64,52 +64,33 @@ bin/bump-version <major|minor|patch> # bump version, tag, push + create release
 
 ## Roadmap blocks
 
-Learning sessions organized as blocks. Each block is one epic issue + linked implementation PRs.
+Learning sessions organized as blocks. Each block is one epic issue + native GitHub sub-issues (auto-tracked progress).
 
-| Block | Topic | Epic | Status |
-|-------|-------|------|--------|
-| 1 | Tooling & repo setup | [#1](https://github.com/pelukron/react-stack-roadmap/issues/1) | ✅ Done |
-| 2 | Module Federation: shell renders remote-home | [#29](https://github.com/pelukron/react-stack-roadmap/issues/29) | 🔄 In progress |
-| 3 | Routing: TanStack Router in shell + remote routes | — | 🔲 Pending |
-| 4 | Styling: Tailwind CSS + shadcn/ui | — | 🔲 Pending |
-| 5 | State: Zustand + TanStack Query | — | 🔲 Pending |
-| 6 | Data fetching: REST vs GraphQL comparison | — | 🔲 Pending |
-| 7 | SSR / RSC comparison: Next.js alongside Vite | — | 🔲 Pending |
-| 8 | Performance optimization | — | 🔲 Pending |
-| 9 | Testing strategy (unit, integration, E2E) | — | 🔲 Pending |
-| 10 | i18n, a11y and forms | — | 🔲 Pending |
-| 11 | Auth patterns | — | 🔲 Pending |
-| 12 | Deployment, CI/CD and monitoring | — | 🔲 Pending |
-| 13 | Security and hardening | — | 🔲 Pending |
+Intermediate hardening blocks use `X.Y` numbering (e.g. 2.5) inside the parent milestone — they don't renumber the roadmap.
 
-### Block 1: Tooling & repo setup ✅
+| Block | Topic | Epic | Milestone | Status |
+|-------|-------|------|-----------|--------|
+| 1 | Tooling & repo setup | [#1](https://github.com/pelukron/react-stack-roadmap/issues/1) | v0.1.0 | ✅ Done |
+| 2 | Module Federation: shell renders remote-home | [#29](https://github.com/pelukron/react-stack-roadmap/issues/29) | v0.1.0 | 🔄 In progress |
+| 2.5 | Pre-Router architecture hardening | [#84](https://github.com/pelukron/react-stack-roadmap/issues/84) | v0.2.0 | 🔲 Pending |
+| 3 | Routing: TanStack Router + testing foundation | [#64](https://github.com/pelukron/react-stack-roadmap/issues/64) | v0.2.0 | 🔲 Pending |
+| 4 | Styling: Tailwind v4 + shadcn/ui + a11y + Storybook | [#65](https://github.com/pelukron/react-stack-roadmap/issues/65) | v0.2.0 | 🔲 Pending |
+| 5 | State + Data: Zustand + TanStack Query + REST vs GraphQL | [#66](https://github.com/pelukron/react-stack-roadmap/issues/66) | v0.2.0 | 🔲 Pending |
+| 6 | Deploy: MFE CI/CD, preview envs + smoke E2E | [#73](https://github.com/pelukron/react-stack-roadmap/issues/73) | v0.2.0 | 🔲 Pending |
+| 7 | Auth: JWT/OAuth, protected routes + RBAC | [#72](https://github.com/pelukron/react-stack-roadmap/issues/72) | v0.3.0 | 🔲 Pending |
+| 8 | SSR/RSC: Next.js alongside Vite | [#68](https://github.com/pelukron/react-stack-roadmap/issues/68) | v0.3.0 | 🔲 Pending |
+| 9 | Performance: budgets, bundle analysis + Lighthouse | [#69](https://github.com/pelukron/react-stack-roadmap/issues/69) | v0.3.0 | 🔲 Pending |
+| 10 | i18n + Forms: RHF + Zod | [#71](https://github.com/pelukron/react-stack-roadmap/issues/71) | v0.3.0 | 🔲 Pending |
+| 11 | Advanced E2E: Playwright full flows + visual regression | [#70](https://github.com/pelukron/react-stack-roadmap/issues/70) | v0.4.0 | 🔲 Pending |
+| 12 | Security & hardening: headers, CSP, OWASP | [#74](https://github.com/pelukron/react-stack-roadmap/issues/74) | v0.4.0 | 🔲 Pending |
 
-| # | Issue | PR |
-|---|-------|-----|
-| #1 | [chore: setup CI, issue templates and branch protection](https://github.com/pelukron/react-stack-roadmap/issues/1) | #2 |
-| #15 | [chore: harden CI and add manual contribution guide](https://github.com/pelukron/react-stack-roadmap/issues/15) | #16 |
-| #23 | [docs: fix contributing and agents documentation](https://github.com/pelukron/react-stack-roadmap/issues/23) | #24 |
-| #25 | [docs: update README with roadmap blocks](https://github.com/pelukron/react-stack-roadmap/issues/25) | #26 |
-| #35 | [chore: unify emoji labels, hotfix workflow and helpers](https://github.com/pelukron/react-stack-roadmap/issues/35) | — |
-| #40 | [chore: remove changesets and automated npm release](https://github.com/pelukron/react-stack-roadmap/issues/40) | #44 |
-| #43 | [chore: simplify release workflow to GitHub tags](https://github.com/pelukron/react-stack-roadmap/issues/43) | #44 |
-| #47 | [docs: add CHANGELOG.md and release notes convention](https://github.com/pelukron/react-stack-roadmap/issues/47) | #48 |
-| #52 | [ci: automate GitHub release creation](https://github.com/pelukron/react-stack-roadmap/issues/52) | #53 |
+### Milestones
 
-### Block 2: Module Federation 🔄
-
-| # | Issue | PR |
-|---|-------|-----|
-| #29 | [feat: shell renders remote-home via Module Federation](https://github.com/pelukron/react-stack-roadmap/issues/29) | [#32](https://github.com/pelukron/react-stack-roadmap/pull/32) |
-| #36 | [docs: implementation guide for Module Federation block](https://github.com/pelukron/react-stack-roadmap/issues/36) | [#51](https://github.com/pelukron/react-stack-roadmap/pull/51) |
-
-### Block 3: TanStack Router 🔲
-
-Epic issue pending. Will cover routing in shell + remote routes.
-
-## Next steps
-
-- Merge [#32](https://github.com/pelukron/react-stack-roadmap/pull/32) — shell renders remote-home via Module Federation.
-- Start Block 3: create epic for TanStack Router integration.
+| Milestone | Due | Blocks |
+|-----------|-----|--------|
+| v0.1.0 — MVP | 2026-07-31 | 1-2 |
+| v0.2.0 — Core Stack | 2026-08-31 | 2.5, 3-6 |
+| v0.3.0 — Production Ready | 2026-10-15 | 7-10 |
+| v0.4.0 — Hardening | 2026-11-15 | 11-12 |
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for data flow details, design decisions and development notes.
