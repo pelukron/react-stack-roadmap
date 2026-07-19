@@ -172,8 +172,8 @@ Epic Issue ──→ Milestone ──→ GitHub Project (kanban)
 | Milestone | Due | Scope |
 |---|---|---|
 | [v0.1.0 — MVP](https://github.com/pelukron/react-stack-roadmap/milestone/1) | 2026-07-31 | Blocks 1-2: Tooling + MF |
-| [v0.2.0 — Core Stack](https://github.com/pelukron/react-stack-roadmap/milestone/2) | 2026-08-31 | Blocks 2.5, 3-6: Hardening, Router, Styling, State+Data, Deploy |
-| [v0.3.0 — Production Ready](https://github.com/pelukron/react-stack-roadmap/milestone/3) | 2026-10-15 | Blocks 7-10: Auth, SSR/RSC, Performance, i18n+Forms |
+| [v0.2.0 — Core Stack](https://github.com/pelukron/react-stack-roadmap/milestone/2) | 2026-08-31 | Blocks 2.5, 3-6, 6.5: Hardening, Router, Styling, State+Data, Deploy, MFE Contract |
+| [v0.3.0 — Production Ready](https://github.com/pelukron/react-stack-roadmap/milestone/3) | 2026-10-15 | Blocks 6.6, 7-10: External MFE, Auth, SSR/RSC, Performance, i18n+Forms |
 | [v0.4.0 — Hardening](https://github.com/pelukron/react-stack-roadmap/milestone/4) | 2026-11-15 | Blocks 11-12: Advanced E2E, Security |
 
 ## Epic Issues
@@ -237,6 +237,8 @@ gh api repos/pelukron/react-stack-roadmap/issues/<EPIC_N>/sub_issues --jq '.[] |
 | [#65](https://github.com/pelukron/react-stack-roadmap/issues/65) Styling + a11y + Storybook | 4 | v0.2.0 | 🔲 Pending |
 | [#66](https://github.com/pelukron/react-stack-roadmap/issues/66) State + Data unified | 5 | v0.2.0 | 🔲 Pending |
 | [#73](https://github.com/pelukron/react-stack-roadmap/issues/73) Deploy MFE + smoke E2E | 6 | v0.2.0 | 🔲 Pending |
+| [#92](https://github.com/pelukron/react-stack-roadmap/issues/92) MFE Contract + template repo | 6.5 | v0.2.0 | 🔲 Pending |
+| [#93](https://github.com/pelukron/react-stack-roadmap/issues/93) External MFE cross-repo | 6.6 | v0.3.0 | 🔲 Pending |
 | [#72](https://github.com/pelukron/react-stack-roadmap/issues/72) Auth | 7 | v0.3.0 | 🔲 Pending |
 | [#68](https://github.com/pelukron/react-stack-roadmap/issues/68) SSR/RSC | 8 | v0.3.0 | 🔲 Pending |
 | [#69](https://github.com/pelukron/react-stack-roadmap/issues/69) Performance | 9 | v0.3.0 | 🔲 Pending |

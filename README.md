@@ -77,6 +77,8 @@ Intermediate hardening blocks use `X.Y` numbering (e.g. 2.5) inside the parent m
 | 4 | Styling: Tailwind v4 + shadcn/ui + a11y + Storybook | [#65](https://github.com/pelukron/react-stack-roadmap/issues/65) | v0.2.0 | 🔲 Pending |
 | 5 | State + Data: Zustand + TanStack Query + REST vs GraphQL | [#66](https://github.com/pelukron/react-stack-roadmap/issues/66) | v0.2.0 | 🔲 Pending |
 | 6 | Deploy: MFE CI/CD, preview envs + smoke E2E | [#73](https://github.com/pelukron/react-stack-roadmap/issues/73) | v0.2.0 | 🔲 Pending |
+| 6.5 | MFE Contract: @rsm/mfe-contract + template repo | [#92](https://github.com/pelukron/react-stack-roadmap/issues/92) | v0.2.0 | 🔲 Pending |
+| 6.6 | External MFE: real cross-repo integration | [#93](https://github.com/pelukron/react-stack-roadmap/issues/93) | v0.3.0 | 🔲 Pending |
 | 7 | Auth: JWT/OAuth, protected routes + RBAC | [#72](https://github.com/pelukron/react-stack-roadmap/issues/72) | v0.3.0 | 🔲 Pending |
 | 8 | SSR/RSC: Next.js alongside Vite | [#68](https://github.com/pelukron/react-stack-roadmap/issues/68) | v0.3.0 | 🔲 Pending |
 | 9 | Performance: budgets, bundle analysis + Lighthouse | [#69](https://github.com/pelukron/react-stack-roadmap/issues/69) | v0.3.0 | 🔲 Pending |
@@ -89,8 +91,8 @@ Intermediate hardening blocks use `X.Y` numbering (e.g. 2.5) inside the parent m
 | Milestone | Due | Blocks |
 |-----------|-----|--------|
 | v0.1.0 — MVP | 2026-07-31 | 1-2 |
-| v0.2.0 — Core Stack | 2026-08-31 | 2.5, 3-6 |
-| v0.3.0 — Production Ready | 2026-10-15 | 7-10 |
+| v0.2.0 — Core Stack | 2026-08-31 | 2.5, 3-6, 6.5 |
+| v0.3.0 — Production Ready | 2026-10-15 | 6.6, 7-10 |
 | v0.4.0 — Hardening | 2026-11-15 | 11-12 |
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for data flow details, design decisions and development notes.
