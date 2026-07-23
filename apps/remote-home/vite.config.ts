@@ -12,6 +12,7 @@ export default defineConfig({
         './App': './src/App.tsx',
       },
       shared: ['react', 'react-dom'],
+      dts: false,
     }),
   ],
   server: {
