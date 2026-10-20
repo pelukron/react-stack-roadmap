@@ -11,6 +11,7 @@ export default defineConfig({
         home: 'home@http://localhost:3001/mf-manifest.json',
       },
       shared: ['react', 'react-dom'],
+      dts: false,
     }),
   ],
   build: {
