@@ -15,10 +15,12 @@ The monorepo (`pnpm` + `Turbo`) reduces friction for daily learning sessions: cr
 └─────────────┘                               └──────────────┘
 ```
 
-- **`apps/shell`**: the host. Declares in `vite.config.ts` that `home` is a remote. At runtime, the browser requests `remoteEntry.js` from `localhost:3001` to load the federated module.
-- **`apps/remote-home`**: the remote. In `vite.config.ts` exposes `./App`. Serves its own `remoteEntry.js`.
+- **`apps/shell`**: the host. In `vite.config.ts`, `home` points to `http://localhost:3001/mf-manifest.json`. `src/App.tsx` imports `home/App` with `lazy` + `Suspense`, so the remote is fetched at runtime and the shell keeps rendering while it loads.
+- **`apps/remote-home`**: the remote. Exposes `./App` and enables `manifest: true`, so it serves `mf-manifest.json` and `remoteEntry.js` in both dev and preview.
+- **Types**: the host declares the remote contract in `src/remotes.d.ts`. DTS generation is disabled (`dts: false`) because `@module-federation/dts-plugin` 2.7 does not support TypeScript 7.
 - **`@module-federation/vite`**: Vite plugin that resolves both host and remote without depending on Webpack/Rspack.
-- **Shared deps**: `react` and `react-dom` are marked as shared so they are not loaded twice.
+- **Shared deps**: `react` and `react-dom` are marked as shared so they are not loaded twice. Both apps pin the exact same React version to satisfy React's runtime version check.
+- **Ports**: shell dev/preview runs on `3000`; remote-home dev/preview runs on `3001`.
 
 ## Shared config (`packages/config`)
 

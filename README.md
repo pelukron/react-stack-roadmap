@@ -56,43 +56,27 @@ bin/bump-version <major|minor|patch> # bump version, tag, push + create release
 
 ## Stack
 
-- Vite 6 + React 19 + TypeScript 5
+- Vite 8 + React 19 + TypeScript 7
 - pnpm workspaces + Turbo 2
 - Biome + Husky + lint-staged
 - Vitest + React Testing Library
-- Module Federation (`@module-federation/vite`)
+- Module Federation (`@module-federation/vite`, host-side lazy loading)
 
 ## Roadmap blocks
 
-Learning sessions organized as blocks. Each block is one epic issue + native GitHub sub-issues (auto-tracked progress).
+Learning sessions organized as blocks. This repository is scoped to the MVP: Blocks 1–2.
 
-Intermediate hardening blocks use `X.Y` numbering (e.g. 2.5) inside the parent milestone — they don't renumber the roadmap.
+Later blocks (2.5 through 12) were closed as out of scope in October 2026; their epics and tasks remain in the issue history for reference.
 
 | Block | Topic | Epic | Milestone | Status |
 |-------|-------|------|-----------|--------|
 | 1 | Tooling & repo setup | [#1](https://github.com/pelukron/react-stack-roadmap/issues/1) | v0.1.0 | ✅ Done |
-| 2 | Module Federation: shell renders remote-home | [#29](https://github.com/pelukron/react-stack-roadmap/issues/29) | v0.1.0 | 🔄 In progress |
-| 2.5 | Pre-Router architecture hardening | [#84](https://github.com/pelukron/react-stack-roadmap/issues/84) | v0.2.0 | 🔲 Pending |
-| 3 | Routing: TanStack Router + testing foundation | [#64](https://github.com/pelukron/react-stack-roadmap/issues/64) | v0.2.0 | 🔲 Pending |
-| 4 | Styling: Tailwind v4 + shadcn/ui + a11y + Storybook | [#65](https://github.com/pelukron/react-stack-roadmap/issues/65) | v0.2.0 | 🔲 Pending |
-| 5 | State + Data: Zustand + TanStack Query + REST vs GraphQL | [#66](https://github.com/pelukron/react-stack-roadmap/issues/66) | v0.2.0 | 🔲 Pending |
-| 6 | Deploy: MFE CI/CD, preview envs + smoke E2E | [#73](https://github.com/pelukron/react-stack-roadmap/issues/73) | v0.2.0 | 🔲 Pending |
-| 6.5 | MFE Contract: @rsm/mfe-contract + template repo | [#92](https://github.com/pelukron/react-stack-roadmap/issues/92) | v0.2.0 | 🔲 Pending |
-| 6.6 | External MFE: real cross-repo integration | [#93](https://github.com/pelukron/react-stack-roadmap/issues/93) | v0.3.0 | 🔲 Pending |
-| 7 | Auth: JWT/OAuth, protected routes + RBAC | [#72](https://github.com/pelukron/react-stack-roadmap/issues/72) | v0.3.0 | 🔲 Pending |
-| 8 | SSR/RSC: Next.js alongside Vite | [#68](https://github.com/pelukron/react-stack-roadmap/issues/68) | v0.3.0 | 🔲 Pending |
-| 9 | Performance: budgets, bundle analysis + Lighthouse | [#69](https://github.com/pelukron/react-stack-roadmap/issues/69) | v0.3.0 | 🔲 Pending |
-| 10 | i18n + Forms: RHF + Zod | [#71](https://github.com/pelukron/react-stack-roadmap/issues/71) | v0.3.0 | 🔲 Pending |
-| 11 | Advanced E2E: Playwright full flows + visual regression | [#70](https://github.com/pelukron/react-stack-roadmap/issues/70) | v0.4.0 | 🔲 Pending |
-| 12 | Security & hardening: headers, CSP, OWASP | [#74](https://github.com/pelukron/react-stack-roadmap/issues/74) | v0.4.0 | 🔲 Pending |
+| 2 | Module Federation: shell renders remote-home | [#29](https://github.com/pelukron/react-stack-roadmap/issues/29) | v0.1.0 | ✅ Done |
 
-### Milestones
+### Milestone
 
 | Milestone | Due | Blocks |
 |-----------|-----|--------|
 | v0.1.0 — MVP | 2026-07-31 | 1-2 |
-| v0.2.0 — Core Stack | 2026-08-31 | 2.5, 3-6, 6.5 |
-| v0.3.0 — Production Ready | 2026-10-15 | 6.6, 7-10 |
-| v0.4.0 — Hardening | 2026-11-15 | 11-12 |
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for data flow details, design decisions and development notes.
